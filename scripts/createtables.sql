@@ -1,0 +1,29 @@
+USE CampusReview;
+
+CREATE TABLE Users(
+    PK_UserId INT NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(150) NOT NULL,
+    FechaDeNacimiento DATE,
+    Edad INT,
+    CreateDate date default(CURRENT_DATE),
+    PRIMARY KEY (PK_UserId)
+);
+
+CREATE TABLE Roles(
+    PK_RoleId INT NOT NULL AUTO_INCREMENT,
+    ProfileName VARCHAR(150) NOT NULL,
+    PRIMARY KEY (PK_RoleId)
+);
+
+CREATE TABLE UserRoles(
+    PK_UserRoleId INT NOT NULL AUTO_INCREMENT,
+    FK_UserId INT,
+    FK_RoleId INT,
+    PRIMARY KEY (PK_UserRoleId),
+    CONSTRAINT User_Role FOREIGN KEY (FK_UserId) REFERENCES Users(PK_UserId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT Role_User FOREIGN KEY (FK_RoleId) REFERENCES Roles(PK_RoleId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
